@@ -1,0 +1,19 @@
+The 4chan image downloader is a program that allows you to -no shit- download
+all the images from a 4chan tread. By defining your own helpers you can also
+make it download images from any 4chan-like message board.
+
+Extending the program for other boards
+------------------------------------------------------------------------------
+
+To bring extra functionality to the application and allow it to download
+images from other 4chan-like boards, you have to create a helper.
+
+A helper is a simple python script and should contain 2 functions. Here is the
+template for a helper:
+
+import re
+import urllib
+
+def make_url(board, tread):
+
+def find_image_urls(url):
