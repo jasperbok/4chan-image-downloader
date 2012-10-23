@@ -1,19 +1,36 @@
-The 4chan image downloader is a program that allows you to -no shit- download
-all the images from a 4chan tread. By defining your own helpers you can also
-make it download images from any 4chan-like message board.
-
-Extending the program for other boards
+------------------------------------------------------------------------------
+                                  What is it?
 ------------------------------------------------------------------------------
 
-To bring extra functionality to the application and allow it to download
-images from other 4chan-like boards, you have to create a helper.
+A Python application that runs from a commandline interface that downloads all
+the images from a specific image board thread for you.
 
-A helper is a simple python script and should contain 2 functions. Here is the
-template for a helper:
+It's easily extendible to use for other message boards. See the 'Extending'
+section in this readme to see how that works.
 
-import re
-import urllib
 
-def make_url(board, tread):
+------------------------------------------------------------------------------
+                                 Requirements
+------------------------------------------------------------------------------
 
-def find_image_urls(url):
+- Python 2.7 (other Python versions might work, but this is the one I used to
+  create and test the program).
+- wget -- This is availble on most (all?) Linux distributions. I don't know
+  about the availability for OS X or Windows (though I guess OS X ships it
+  by default as well).
+
+
+------------------------------------------------------------------------------
+                                  How to Use
+------------------------------------------------------------------------------
+
+Simply place whole program somewhere and navigate to the chosen location from
+your commandline. From there, start the program using the command
+'python download_images.py'. From there on, the application explains itself.
+
+
+------------------------------------------------------------------------------
+                                  Extending
+------------------------------------------------------------------------------
+
+Coming very soon :)
