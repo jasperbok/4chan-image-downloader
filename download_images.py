@@ -1,4 +1,4 @@
-from downloaders import fourchan
+from downloaders.fourchan import FourChanDownloader
 
 daemons = []
 

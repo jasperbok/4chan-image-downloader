@@ -1,3 +1,9 @@
+import os
+import re
+import subprocess
+import sys
+import urllib
+
 class ImageBoardDownloader:
     """
     A base class that downloads images.

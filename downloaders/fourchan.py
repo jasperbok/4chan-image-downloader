@@ -1,4 +1,4 @@
-import image_downloader
+from image_downloader import ImageBoardDownloader
 
 class FourChanDownloader(ImageBoardDownloader):
     def setup(self):
