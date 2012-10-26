@@ -100,6 +100,6 @@ class ImageBoardDownloader:
         current_image = 1
 
         for url in self.image_urls:
-            print 'DOWNLOADING IMAGE ' + str(current_image) + ' OUT OF ' + str(total_num_images)
-            subprocess.call(['wget', '--directory-prefix=' + self.directory, url])
+            print 'Downloading image ' + str(current_image) + ' out of ' + str(total_num_images)
+            urllib.urlretrieve(url, self.directory + '/' + url.split('/')[-1])
             current_image = current_image + 1

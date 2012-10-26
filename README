@@ -15,9 +15,6 @@ section in this readme to see how that works.
 
 - Python 2.7 (other Python versions might work, but this is the one I used to
   create and test the program).
-- wget -- This is availble on most (all?) Linux distributions. I don't know
-  about the availability for OS X or Windows (though I guess OS X ships it
-  by default as well).
 
 
 ------------------------------------------------------------------------------
@@ -33,4 +30,9 @@ your commandline. From there, start the program using the command
                                   Extending
 ------------------------------------------------------------------------------
 
-Coming very soon :)
+You can extend the application by writing a small class that represents the
+image board you want to download from.
+
+I'll write a better guide later on, but for now you can copy the 
+FourChanDownloader.py from the downloaders folder and edit (and rename) that
+one to your needs.
