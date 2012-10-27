@@ -1,0 +1,5 @@
+4chan
+(/[A-Za-z]+/src/\d+\.)(jpeg|jpg|png|gif)
+http://images.4chan.org
+http://boards.4chan.org/{board}/res/{thread}
+

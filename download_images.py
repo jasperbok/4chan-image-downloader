@@ -1,17 +1,41 @@
-from downloaders.fourchan import FourChanDownloader
+import ConfigParser
+
+from image_downloader import ImageBoardDownloader
 
 daemons = []
+settings = {}
+boards = []
 
 def initialize():
-    website = raw_input('From what website are we going to download?\n\n1 - 4chan\n2 - desuchan\n')
-    if website == '1':
-        daemons.append(FourChanDownloader())
-    elif website == '2':
-        import desuchan_helper as helper
-        website = 'desuchan'
-    else:
-        print 'That\'s not a valid option. Please choose something else.'
-        initialize()
+    # Read settings from the settings.txt file.
+    with open('settings.txt', 'r') as settings_file:
+        for line in settings_file:
+            setting_name, setting_value = line.split(' = ')
+            settings[setting_name] = setting_value.replace('\n', '')
+
+    # Read all available boards.
+    with open('boards.txt', 'r') as boards_file:
+        entry = {}
+        counter = 0
+        for line in boards_file:
+            if not line.strip():  # An empty line indicates a new entry.
+                boards.append(entry)
+                entry = {}
+                counter = 0
+            else:
+                if counter == 0:
+                    entry['name'] = line.replace('\n', '')
+                elif counter == 1:
+                    entry['regex'] = line.replace('\n', '')
+                elif counter == 2:
+                    entry['image_url'] = line.replace('\n', '')
+                else:
+                    entry['url_template'] = line.replace('\n', '')
+            counter = counter + 1
+    
+    # Ask user for a website to download from.
+    add_downloader()
+
     '''
     tread_alias = ''
     with open('tread_aliases.txt', 'r') as alias_file:
@@ -35,6 +59,22 @@ def initialize():
             else:
                 tread_alias = tread
     '''
+
+def add_downloader():
+    print 'What website do you want to download from?'
+
+    if (len(boards) is 0):
+        print '\nOops, there are no boards available.\n\nAdd one or more boards to your boards.txt file.'
+    else:
+        for board in boards:
+            print str(boards.index(board)) + ' = ' + board['name']
+        website = int(raw_input('0 - ' + str(len(boards) - 1) + '?'))
+    if isinstance(website, int) and website < len(boards):
+        daemons.append(ImageBoardDownloader(boards[website]))
+    else:
+        print 'That\'s not a valid option. Please choose something else.'
+        add_downloader()
+    
 
 if __name__ == '__main__':
     initialize()
