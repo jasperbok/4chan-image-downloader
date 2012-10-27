@@ -3,3 +3,8 @@
 http://images.4chan.org
 http://boards.4chan.org/{board}/res/{thread}
 
+7chan
+(/[A-Za-z]+/src/\d+\.)(jpeg|jpg|png|gif)
+https://7chan.org
+http://7chan.org/{board}/res/{thread}.html
+

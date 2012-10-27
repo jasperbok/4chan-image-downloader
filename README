@@ -30,9 +30,35 @@ your commandline. From there, start the program using the command
                                   Extending
 ------------------------------------------------------------------------------
 
-You can extend the application by writing a small class that represents the
-image board you want to download from.
+If you want to support additional message boards, you simply add an entry for
+every board you want to support to the boards.txt file.
 
-I'll write a better guide later on, but for now you can copy the 
-FourChanDownloader.py from the downloaders folder and edit (and rename) that
-one to your needs.
+All board entries should be seperated by an empty line and the last board
+entry should be followed by an empty line as well.
+
+A board entry consists of 4 lines, each line representing a variable. These
+are:
+
+name
+regular expressions to find images in a html page
+base image url
+thread url format
+
+Name:       The name of the board. This variable is used in presenting the
+            websites a user can choose. It is also used as the name of the
+            top-level directory in which all images from this board will be
+            stored.
+Regular     A regular expression for finding the images in a tread. This
+expression  expression should match the whole part of the image URL after
+            the top-level domain (such as .com or .org). So for the URL
+            http://images.4chan.org/g/src/1231432.png it should match
+            everything (including the '/') after the .org part.
+Base image  This is the part of the image url that is not matched by the
+URL         above regular expression.
+Thread URL  The format of a URL to a thread. You should use the {board} and
+format      {thread} variables here so these can be replaced by the values
+            representing these variables.
+
+If you would like examples of how to do this, please check out the existing
+4chan and 7chan entries that are in boards.txt by default. Just remember to
+put a blank line after every board entry, even if it's the last entry.

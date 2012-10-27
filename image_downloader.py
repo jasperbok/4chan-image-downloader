@@ -2,6 +2,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib
 
 class ImageBoardDownloader:
@@ -17,13 +18,23 @@ class ImageBoardDownloader:
         self.image_regex = settings['regex']
         self.image_url = settings['image_url']
         self.url_template = settings['url_template']
+        self.rescan_time = settings['rescan_time']
+        self.time_last_checked = time.time()
         self.board = raw_input('What board should I download from?\n')
         self.tread = raw_input('What tread number?\n')
         self.base_url = self.make_url(self.board, self.tread)
         self.directory = self.make_directory()
-        self.image_urls = self.find_image_urls(self.base_url)
-        self.remove_duplicates()
-        self.download_images()
+
+        self.loop()
+
+    def loop(self):
+        while True:
+            #if time.time() >= self.time_last_checked + self.rescan_time:
+            self.image_urls = self.find_image_urls(self.base_url)
+            self.remove_duplicates()
+            self.download_images()
+            self.time_last_checked = time.time()
+            time.sleep(self.rescan_time)
 
     def report(self):
         """

@@ -1,1 +1,1 @@
-rescan_time = 60
+rescan_time = 20

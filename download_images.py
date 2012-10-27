@@ -10,7 +10,8 @@ def initialize():
     # Read settings from the settings.txt file.
     with open('settings.txt', 'r') as settings_file:
         for line in settings_file:
-            setting_name, setting_value = line.split(' = ')
+            setting_name, setting_value = line.strip().split(' = ')
+            setting_value = setting_value.strip()
             settings[setting_name] = setting_value.replace('\n', '')
 
     # Read all available boards.
@@ -19,20 +20,22 @@ def initialize():
         counter = 0
         for line in boards_file:
             if not line.strip():  # An empty line indicates a new entry.
+                entry['rescan_time'] = int(settings['rescan_time'])
                 boards.append(entry)
                 entry = {}
                 counter = 0
             else:
+                data = line.strip()
                 if counter == 0:
-                    entry['name'] = line.replace('\n', '')
+                    entry['name'] = data
                 elif counter == 1:
-                    entry['regex'] = line.replace('\n', '')
+                    entry['regex'] = data
                 elif counter == 2:
-                    entry['image_url'] = line.replace('\n', '')
+                    entry['image_url'] = data
                 else:
-                    entry['url_template'] = line.replace('\n', '')
-            counter = counter + 1
-    
+                    entry['url_template'] = data
+                counter = counter + 1
+
     # Ask user for a website to download from.
     add_downloader()
 
